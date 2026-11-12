@@ -38,6 +38,31 @@
     "degraded": "The semantic side of the search is unavailable: the results are lexical only.",
     "empty": "No documents found."
   },
-  "document": { "title": "Document" },
+  "document": {
+    "title": "Document",
+    "back": "Back to the corpus",
+    "hint": "Open a document from the corpus list to read it here.",
+    "notFound": "This document was not found.",
+    "noNumber": "no number",
+    "ocrHint": "The text comes from a scanned PDF read with local OCR: errors are possible.",
+    "length": "{{loaded}} of {{total}} characters",
+    "nextSlice": "Load the next part",
+    "refs": {
+      "title": "Norm references",
+      "empty": "No norm references were extracted from this document.",
+      "articolo": "art. {{n}}",
+      "comma": "comma {{n}}",
+      "cites": "Documents citing this norm"
+    },
+    "norma": {
+      "title": "Documents citing a norm",
+      "label": "URN:NIR of the act or the article",
+      "placeholder": "urn:nir:stato:legge:2000-07-27;212~art11",
+      "go": "Search",
+      "invalid": "This is not a valid URN:NIR (urn:nir:stato:legge:2000-07-27;212 or ...;212~art11).",
+      "empty": "No document found for this norm.",
+      "note": "Best effort: only the references that the extractor resolved to an URN can be found. An empty result is NOT proof that no document cites the norm."
+    }
+  },
   "status": { "title": "Corpus status" }
 }

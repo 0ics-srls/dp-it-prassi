@@ -1,11 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { DocumentStore } from './document.store';
 
 @Component({
   selector: 'dp-it-prassi-document-view',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslocoPipe],
+  imports: [TranslocoPipe, DatePipe],
   templateUrl: './document-view.component.html',
+  styleUrl: './document-view.component.css',
 })
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class -- scaffold of block 23: the store and the template come with the Screen block
-export class DocumentViewComponent {}
+export class DocumentViewComponent {
+  protected readonly store = inject(DocumentStore);
+
+  protected value(event: Event): string {
+    return (event.target as HTMLInputElement).value;
+  }
+}

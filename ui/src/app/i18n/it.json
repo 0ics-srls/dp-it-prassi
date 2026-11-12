@@ -38,6 +38,31 @@
     "degraded": "La parte semantica della ricerca non è disponibile: i risultati sono solo lessicali.",
     "empty": "Nessun documento trovato."
   },
-  "document": { "title": "Documento" },
+  "document": {
+    "title": "Documento",
+    "back": "Torna al corpus",
+    "hint": "Apri un documento dall'elenco del corpus per leggerlo qui.",
+    "notFound": "Documento non trovato.",
+    "noNumber": "senza numero",
+    "ocrHint": "Il testo proviene da un PDF scansionato letto con OCR locale: possibili errori.",
+    "length": "{{loaded}} di {{total}} caratteri",
+    "nextSlice": "Carica la parte successiva",
+    "refs": {
+      "title": "Riferimenti normativi",
+      "empty": "Da questo documento non sono stati estratti riferimenti normativi.",
+      "articolo": "art. {{n}}",
+      "comma": "comma {{n}}",
+      "cites": "Documenti che citano questa norma"
+    },
+    "norma": {
+      "title": "Documenti che citano una norma",
+      "label": "URN:NIR dell'atto o dell'articolo",
+      "placeholder": "urn:nir:stato:legge:2000-07-27;212~art11",
+      "go": "Cerca",
+      "invalid": "Non è un URN:NIR valido (urn:nir:stato:legge:2000-07-27;212 oppure ...;212~art11).",
+      "empty": "Nessun documento trovato per questa norma.",
+      "note": "Best effort: si trovano solo i riferimenti che l'estrattore ha risolto in un URN. Un risultato vuoto NON è una prova che nessun documento citi la norma."
+    }
+  },
   "status": { "title": "Stato del corpus" }
 }

@@ -1,4 +1,138 @@
-<section>
-  <h1 data-testid="screen-title">{{ 'document.title' | transloco }}</h1>
-  <p class="hint">{{ 'common.attribution' | transloco }}</p>
+<section class="document">
+  <header class="head">
+    <h1 data-testid="screen-title">{{ 'document.title' | transloco }}</h1>
+    <button type="button" data-testid="doc-back" (click)="store.back()">{{ 'document.back' | transloco }}</button>
+  </header>
+  <p class="hint" data-testid="doc-attribution">{{ 'common.attribution' | transloco }}</p>
+  <p class="hint strong" data-testid="doc-not-law">{{ 'common.notLaw' | transloco }}</p>
+
+  @switch (store.state()) {
+    @case ('idle') {
+      <p data-testid="doc-hint">{{ 'document.hint' | transloco }}</p>
+    }
+    @case ('loading') {
+      <p data-testid="doc-loading">{{ 'common.loading' | transloco }}</p>
+    }
+    @case ('notfound') {
+      <p data-testid="doc-notfound">{{ 'document.notFound' | transloco }}</p>
+    }
+    @case ('error') {
+      <p class="error" role="alert" data-testid="doc-error">{{ 'common.error' | transloco }} <span class="detail">{{ store.errorDetail() }}</span></p>
+    }
+    @case ('ready') {
+      @if (store.doc(); as doc) {
+        <div class="header" data-testid="doc-header">
+          <span class="badge" data-testid="doc-tipo">{{ doc.tipo }}</span>
+          @if (doc.numero !== null) {
+            <strong>{{ doc.numero }}/{{ doc.anno ?? '-' }}</strong>
+          } @else {
+            <strong>{{ 'document.noNumber' | transloco }} ({{ doc.anno ?? '-' }})</strong>
+          }
+          @if (doc.data) {
+            <span class="meta">{{ doc.data | date: 'yyyy-MM-dd' : 'UTC' }}</span>
+          }
+          @if (doc.ente) {
+            <span class="meta">{{ doc.ente }}</span>
+          }
+          @if (doc.struttura) {
+            <span class="meta">{{ doc.struttura }}</span>
+          }
+          @if (doc.estrazione === 'ocr') {
+            <span class="badge ocr" data-testid="doc-ocr" [title]="'document.ocrHint' | transloco">OCR</span>
+          }
+          @if (store.sourceLink() !== '') {
+            <a class="meta" data-testid="doc-source" target="_blank" rel="noopener noreferrer" [href]="store.sourceLink()">{{ 'common.openSource' | transloco }}</a>
+          }
+        </div>
+        @if (doc.oggetto) {
+          <h2 class="oggetto" data-testid="doc-oggetto">{{ doc.oggetto }}</h2>
+        }
+
+        <article class="body">
+          <pre class="text" data-testid="doc-text">{{ store.text() }}</pre>
+          <p class="meta" data-testid="doc-length">{{ 'document.length' | transloco: { loaded: store.text().length, total: doc.textLength } }}</p>
+          @if (store.moreError() !== '') {
+            <p class="error" role="alert" data-testid="doc-slice-error">{{ 'common.error' | transloco }} <span class="detail">{{ store.moreError() }}</span></p>
+          }
+          @if (store.hasMore()) {
+            <button type="button" data-testid="doc-next" [disabled]="store.loadingMore()" (click)="store.nextSlice()">{{ 'document.nextSlice' | transloco }}</button>
+          }
+        </article>
+
+        <section class="refs" [attr.aria-label]="'document.refs.title' | transloco">
+          <h2>{{ 'document.refs.title' | transloco }}</h2>
+          @if (doc.riferimenti.length === 0) {
+            <p data-testid="doc-refs-empty">{{ 'document.refs.empty' | transloco }}</p>
+          } @else {
+            <ul>
+              @for (ref of doc.riferimenti; track $index) {
+                <li data-testid="doc-ref">
+                  <span>{{ ref.descrizione }}</span>
+                  @if (ref.articolo) {
+                    <span class="meta">{{ 'document.refs.articolo' | transloco: { n: ref.articolo } }}</span>
+                  }
+                  @if (ref.comma) {
+                    <span class="meta">{{ 'document.refs.comma' | transloco: { n: ref.comma } }}</span>
+                  }
+                  @if (ref.normaUrn) {
+                    <code class="urn" data-testid="doc-ref-urn">{{ ref.normaUrn }}</code>
+                    <button type="button" data-testid="doc-ref-cites" (click)="store.citing(ref.normaUrn)">{{ 'document.refs.cites' | transloco }}</button>
+                  }
+                </li>
+              }
+            </ul>
+          }
+        </section>
+      }
+
+      <section class="norma" [attr.aria-label]="'document.norma.title' | transloco">
+        <h2>{{ 'document.norma.title' | transloco }}</h2>
+        <div class="filters">
+          <label for="pr-norma">{{ 'document.norma.label' | transloco }}</label>
+          <input id="pr-norma" type="text" data-testid="norma-input" [value]="store.normaText()" [placeholder]="'document.norma.placeholder' | transloco" (input)="store.setNorma(value($event))" />
+          <button type="button" data-testid="norma-go" [disabled]="store.normaState() === 'loading'" (click)="store.searchNorma()">{{ 'document.norma.go' | transloco }}</button>
+        </div>
+        <p class="hint" data-testid="norma-note">{{ 'document.norma.note' | transloco }}</p>
+        @switch (store.normaState()) {
+          @case ('invalid') {
+            <p class="error" role="alert" data-testid="norma-invalid">{{ 'document.norma.invalid' | transloco }}</p>
+          }
+          @case ('loading') {
+            <p>{{ 'common.loading' | transloco }}</p>
+          }
+          @case ('error') {
+            <p class="error" role="alert" data-testid="norma-error">{{ 'common.error' | transloco }}</p>
+          }
+          @case ('done') {
+            @if (store.normaRows().length === 0) {
+              <p data-testid="norma-empty">{{ 'document.norma.empty' | transloco }}</p>
+            } @else {
+              <ul class="results">
+                @for (row of store.normaRows(); track row.id) {
+                  <li class="result" data-testid="norma-row">
+                    <div class="line">
+                      <span class="badge">{{ row.tipo }}</span>
+                      <button type="button" class="link" data-testid="norma-open" (click)="store.openDocument(row.id)">{{ row.numero ?? '-' }}/{{ row.anno ?? '-' }}</button>
+                      @if (row.ente) {
+                        <span class="meta">{{ row.ente }}</span>
+                      }
+                      @if (row.data) {
+                        <span class="meta">{{ row.data | date: 'yyyy-MM-dd' : 'UTC' }}</span>
+                      }
+                    </div>
+                    @if (row.oggetto) {
+                      <div class="oggetto-line">{{ row.oggetto }}</div>
+                    }
+                    @for (ref of row.matchedRefs; track $index) {
+                      <div class="meta" data-testid="norma-matched">{{ ref.descrizione }}</div>
+                    }
+                  </li>
+                }
+              </ul>
+            }
+          }
+        }
+      </section>
+    }
+  }
 </section>

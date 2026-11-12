@@ -38,6 +38,31 @@
     "degraded": "Sémantická časť hľadania nie je dostupná: výsledky sú len lexikálne.",
     "empty": "Nenašli sa žiadne dokumenty."
   },
-  "document": { "title": "Dokument" },
+  "document": {
+    "title": "Dokument",
+    "back": "Späť na korpus",
+    "hint": "Dokument otvorte zo zoznamu v korpuse.",
+    "notFound": "Dokument sa nenašiel.",
+    "noNumber": "bez čísla",
+    "ocrHint": "Text pochádza zo skenovaného PDF prečítaného lokálnym OCR: možné sú chyby.",
+    "length": "{{loaded}} z {{total}} znakov",
+    "nextSlice": "Načítať ďalšiu časť",
+    "refs": {
+      "title": "Odkazy na normy",
+      "empty": "Z tohto dokumentu sa nevyťažili žiadne odkazy na normy.",
+      "articolo": "čl. {{n}}",
+      "comma": "odsek {{n}}",
+      "cites": "Dokumenty citujúce túto normu"
+    },
+    "norma": {
+      "title": "Dokumenty citujúce normu",
+      "label": "URN:NIR aktu alebo článku",
+      "placeholder": "urn:nir:stato:legge:2000-07-27;212~art11",
+      "go": "Hľadať",
+      "invalid": "Toto nie je platný URN:NIR (urn:nir:stato:legge:2000-07-27;212 alebo ...;212~art11).",
+      "empty": "Pre túto normu sa nenašiel žiadny dokument.",
+      "note": "Best effort: nájsť možno len odkazy, ktoré extraktor vyriešil na URN. Prázdny výsledok NIE JE dôkaz, že normu nikto necituje."
+    }
+  },
   "status": { "title": "Stav korpusu" }
 }

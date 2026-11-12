@@ -3,16 +3,17 @@
  * address that opens directly and survives a reload. The key is NEVER pre-encoded here; only '/' needs care because it separates route segments.
  */
 const PREFIX = 'doc~';
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export function docKey(id: string): string {
   return `${PREFIX}${id.replaceAll('/', '%2F')}`;
 }
 
-/** null when the key is empty, has no `doc~` prefix or no id (the Screen then shows a hint and calls no Tool). */
+/** null when the key is empty, has no `doc~` prefix or its id is not a uuid (the Screen then shows a hint and calls no Tool, which would answer 400). */
 export function parseDocKey(subPath: string): string | null {
   if (!subPath.startsWith(PREFIX)) {
     return null;
   }
   const id = subPath.slice(PREFIX.length).replaceAll('%2F', '/').trim();
-  return id === '' ? null : id;
+  return UUID.test(id) ? id : null;
 }
