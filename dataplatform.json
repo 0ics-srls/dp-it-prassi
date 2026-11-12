@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.dataplatform.0ics.ai/dataplatform/1.json",
   "name": "it-prassi",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "hostApi": "1",
   "sources": [
     {
@@ -238,8 +238,51 @@
       "produces": ["ds_it_prassi.passages"]
     }
   ],
+  "ui": {
+    "hostUiApi": "1",
+    "entry": "ui/dist/main.js",
+    "styles": ["ui/dist/styles.css"],
+    "menu": {
+      "label": { "sk": "Prax Taliansko", "en": "Italian tax practice", "it": "Prassi fiscale italiana" },
+      "icon": "pi pi-file",
+      "order": 130
+    },
+    "screens": [
+      {
+        "id": "corpus",
+        "element": "dp-it-prassi-corpus",
+        "label": { "sk": "Daňová prax", "en": "Tax practice", "it": "Prassi fiscale" },
+        "icon": "pi pi-list",
+        "default": true
+      },
+      {
+        "id": "document",
+        "element": "dp-it-prassi-document",
+        "label": { "sk": "Detail dokumentu", "en": "Document detail", "it": "Dettaglio documento" },
+        "icon": "pi pi-file"
+      },
+      {
+        "id": "status",
+        "element": "dp-it-prassi-status",
+        "label": { "sk": "Stav korpusu", "en": "Corpus status", "it": "Stato del corpus" },
+        "icon": "pi pi-chart-bar"
+      }
+    ],
+    "permissions": [
+      "tools:search",
+      "tools:lookup",
+      "tools:doc",
+      "tools:su_norma",
+      "tools:status",
+      "navigate"
+    ]
+  },
   "releases": {
     "breakingChanges": {
+      "0.2.0": {
+        "message": "Screens added: tax practice list with search, filters and lookup by estremi, document detail with text slices and norm references, corpus status (Console menu Italian tax practice); no Tool, column or table is changed",
+        "scopedImpact": "it-prassi UI"
+      },
       "0.1.0": {
         "message": "Initial release: Agenzia delle Entrate circolari, risoluzioni and provvedimenti and MEF DocTrib interpelli (detect, grab, convert with local OCR, ingest, embed), schema ds_it_prassi with 5 tables, 6 Tools (search, doc, su_norma, lookup, guide, status), no Screens yet",
         "scopedImpact": "new package"
