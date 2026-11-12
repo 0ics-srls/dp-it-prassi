@@ -1,0 +1,11 @@
+{
+  "tool": "lookup",
+  "params": {
+    "tipo": "circolare",
+    "anno": 2025
+  },
+  "expect": {
+    "minRows": 0,
+    "maxRows": 50
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "description": "Structured lookup of prassi documents by their extremes, without the text (replaces the legacy query_prassi). Filters, all optional and combined with AND: tipo (circolare, risoluzione, provvedimento, interpello; exact, case-insensitive), numero (exact text, e.g. \"10\" or \"6/E\" as stored), anno, data_from and data_to (YYYY-MM-DD, inclusive), ente (substring), fonte (ade-portale or doctrib). sort (tipo, anno, numero, data; default tipo) with desc (default false); a missing value is always last. limit (1..50, default 20) and offset page the result; every row carries total, the size of the filtered set. Rows: id, ente, tipo, numero, anno, data, oggetto (first 300 characters), source_url, fonte, total. A call without any parameter lists the first page of the corpus. Read a document with it-prassi_doc. Example: {\"tipo\": \"circolare\", \"anno\": 2025, \"sort\": \"numero\", \"desc\": true, \"limit\": 10}.",
+  "version": 1,
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "tipo": { "type": "string", "maxLength": 50 },
+      "numero": { "type": "string", "maxLength": 30 },
+      "anno": { "type": "integer" },
+      "data_from": { "type": "string", "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+      "data_to": { "type": "string", "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+      "ente": { "type": "string", "maxLength": 200 },
+      "fonte": { "type": "string", "enum": ["ade-portale", "doctrib"] },
+      "sort": { "type": "string", "enum": ["tipo", "anno", "numero", "data"], "default": "tipo" },
+      "desc": { "type": "boolean", "default": false },
+      "limit": { "type": "integer", "minimum": 1, "maximum": 50, "default": 20 },
+      "offset": { "type": "integer", "minimum": 0, "default": 0 }
+    }
+  },
+  "annotations": { "readOnlyHint": true, "idempotentHint": true },
+  "maxRows": 50,
+  "maxBytes": 262144,
+  "timeoutMs": 10000,
+  "pagination": "none"
+}
