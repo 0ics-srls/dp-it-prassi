@@ -1,0 +1,97 @@
+{
+  "common": {
+    "loading": "Načítavam...",
+    "error": "Údaje sa nepodarilo načítať.",
+    "retry": "Skúsiť znova",
+    "previous": "Predchádzajúca",
+    "next": "Ďalšia",
+    "pager": "Stránky",
+    "range": "{{from}}-{{to}} z {{total}}",
+    "openSource": "Otvoriť na zdroji",
+    "any": "Všetky",
+    "attribution": "Agenzia delle Entrate (portale) / MEF - def.finanze.it (DocTrib); administratívne akty; text licencie nie je zverejnený.",
+    "notLaw": "Daňová prax NIE JE prameňom práva: vyjadruje výklad správy."
+  },
+  "corpus": {
+    "title": "Daňová prax",
+    "search": "Hľadať v dokumentoch",
+    "searchPlaceholder": "napr. fringe benefit",
+    "mode": "Režim",
+    "modes": { "hybrid": "hybrid", "lexical": "lexical", "semantic": "semantic" },
+    "modeShown": "Režim hľadania: {{mode}}",
+    "tipo": "Druh",
+    "tipi": { "circolare": "Circolare", "risoluzione": "Risoluzione", "provvedimento": "Provvedimento", "interpello": "Interpello" },
+    "ente": "Orgán",
+    "annoFrom": "Rok od",
+    "annoTo": "Rok do",
+    "sort": "Zoradiť podľa",
+    "sorts": { "tipo": "druhu", "anno": "roku", "numero": "čísla", "data": "dátumu" },
+    "desc": "Zostupne",
+    "estremi": {
+      "title": "Nájsť podľa údajov dokumentu",
+      "numero": "Číslo",
+      "numeroPlaceholder": "napr. 10 alebo 6/E",
+      "anno": "Rok",
+      "go": "Nájsť",
+      "clear": "Späť na zoznam"
+    },
+    "degraded": "Sémantická časť hľadania nie je dostupná: výsledky sú len lexikálne.",
+    "empty": "Nenašli sa žiadne dokumenty."
+  },
+  "document": {
+    "title": "Dokument",
+    "back": "Späť na korpus",
+    "hint": "Dokument otvorte zo zoznamu v korpuse.",
+    "notFound": "Dokument sa nenašiel.",
+    "noNumber": "bez čísla",
+    "ocrHint": "Text pochádza zo skenovaného PDF prečítaného lokálnym OCR: možné sú chyby.",
+    "length": "{{loaded}} z {{total}} znakov",
+    "nextSlice": "Načítať ďalšiu časť",
+    "refs": {
+      "title": "Odkazy na normy",
+      "empty": "Z tohto dokumentu sa nevyťažili žiadne odkazy na normy.",
+      "articolo": "čl. {{n}}",
+      "comma": "odsek {{n}}",
+      "cites": "Dokumenty citujúce túto normu"
+    },
+    "norma": {
+      "title": "Dokumenty citujúce normu",
+      "label": "URN:NIR aktu alebo článku",
+      "placeholder": "urn:nir:stato:legge:2000-07-27;212~art11",
+      "go": "Hľadať",
+      "invalid": "Toto nie je platný URN:NIR (urn:nir:stato:legge:2000-07-27;212 alebo ...;212~art11).",
+      "empty": "Pre túto normu sa nenašiel žiadny dokument.",
+      "note": "Best effort: nájsť možno len odkazy, ktoré extraktor vyriešil na URN. Prázdny výsledok NIE JE dôkaz, že normu nikto necituje."
+    }
+  },
+  "status": {
+    "title": "Stav korpusu",
+    "refresh": "Obnoviť",
+    "empty": "Zatiaľ žiadne dokumenty: prvý import ešte nebežal.",
+    "columns": {
+      "fonte": "Zdroj",
+      "tipo": "Druh",
+      "documents": "Dokumenty",
+      "years": "Roky",
+      "ocr": "OCR",
+      "passages": "Pasáže",
+      "pending": "Bez embeddingu",
+      "refs": "Vyriešené odkazy",
+      "duplicates": "Skupiny duplicít",
+      "lastIngested": "Posledný import"
+    },
+    "fonti": { "ade-portale": "Portál Agenzia delle Entrate", "doctrib": "MEF DocTrib" },
+    "pendingHint": "Pasáže čakajúce na embedding nie sú dostupné sémantickému hľadaniu.",
+    "refsValue": "{{mapped}} z {{total}}",
+    "skipped": "Preskočené položky podľa dôvodu",
+    "coverage": {
+      "title": "Deklarované a prevzaté",
+      "window": "Okno",
+      "declared": "Deklarované",
+      "taken": "Prevzaté",
+      "missing": "Chýba",
+      "truncated": "Skrátené"
+    },
+    "limits": "Obmedzenia: mesačné stránky portálu začínajú v polovici roka 2019, staršie circolari a risoluzioni v korpuse nie sú. Hľadanie podľa normy nájde len odkazy vyriešené na URN: prázdny výsledok NIE JE dôkaz, že normu nikto necituje."
+  }
+}

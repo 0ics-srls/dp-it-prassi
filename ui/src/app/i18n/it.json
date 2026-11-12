@@ -1,0 +1,97 @@
+{
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Impossibile caricare i dati.",
+    "retry": "Riprova",
+    "previous": "Precedente",
+    "next": "Successiva",
+    "pager": "Pagine",
+    "range": "{{from}}-{{to}} di {{total}}",
+    "openSource": "Apri alla fonte",
+    "any": "Qualsiasi",
+    "attribution": "Agenzia delle Entrate (portale) / MEF - def.finanze.it (DocTrib); atti amministrativi; testo della licenza non pubblicato.",
+    "notLaw": "La prassi NON è una fonte del diritto: esprime l'interpretazione dell'amministrazione."
+  },
+  "corpus": {
+    "title": "Prassi fiscale",
+    "search": "Cerca nei documenti",
+    "searchPlaceholder": "es. fringe benefit",
+    "mode": "Modalità",
+    "modes": { "hybrid": "hybrid", "lexical": "lexical", "semantic": "semantic" },
+    "modeShown": "Modalità di ricerca: {{mode}}",
+    "tipo": "Tipo",
+    "tipi": { "circolare": "Circolare", "risoluzione": "Risoluzione", "provvedimento": "Provvedimento", "interpello": "Interpello" },
+    "ente": "Ente",
+    "annoFrom": "Anno da",
+    "annoTo": "Anno a",
+    "sort": "Ordina per",
+    "sorts": { "tipo": "tipo", "anno": "anno", "numero": "numero", "data": "data" },
+    "desc": "Decrescente",
+    "estremi": {
+      "title": "Cerca per estremi",
+      "numero": "Numero",
+      "numeroPlaceholder": "es. 10 oppure 6/E",
+      "anno": "Anno",
+      "go": "Cerca",
+      "clear": "Torna all'elenco"
+    },
+    "degraded": "La parte semantica della ricerca non è disponibile: i risultati sono solo lessicali.",
+    "empty": "Nessun documento trovato."
+  },
+  "document": {
+    "title": "Documento",
+    "back": "Torna al corpus",
+    "hint": "Apri un documento dall'elenco del corpus per leggerlo qui.",
+    "notFound": "Documento non trovato.",
+    "noNumber": "senza numero",
+    "ocrHint": "Il testo proviene da un PDF scansionato letto con OCR locale: possibili errori.",
+    "length": "{{loaded}} di {{total}} caratteri",
+    "nextSlice": "Carica la parte successiva",
+    "refs": {
+      "title": "Riferimenti normativi",
+      "empty": "Da questo documento non sono stati estratti riferimenti normativi.",
+      "articolo": "art. {{n}}",
+      "comma": "comma {{n}}",
+      "cites": "Documenti che citano questa norma"
+    },
+    "norma": {
+      "title": "Documenti che citano una norma",
+      "label": "URN:NIR dell'atto o dell'articolo",
+      "placeholder": "urn:nir:stato:legge:2000-07-27;212~art11",
+      "go": "Cerca",
+      "invalid": "Non è un URN:NIR valido (urn:nir:stato:legge:2000-07-27;212 oppure ...;212~art11).",
+      "empty": "Nessun documento trovato per questa norma.",
+      "note": "Best effort: si trovano solo i riferimenti che l'estrattore ha risolto in un URN. Un risultato vuoto NON è una prova che nessun documento citi la norma."
+    }
+  },
+  "status": {
+    "title": "Stato del corpus",
+    "refresh": "Aggiorna",
+    "empty": "Ancora nessun documento: il primo import non è ancora avvenuto.",
+    "columns": {
+      "fonte": "Fonte",
+      "tipo": "Tipo",
+      "documents": "Documenti",
+      "years": "Anni",
+      "ocr": "OCR",
+      "passages": "Passaggi",
+      "pending": "Senza embedding",
+      "refs": "Riferimenti risolti",
+      "duplicates": "Gruppi duplicati",
+      "lastIngested": "Ultimo import"
+    },
+    "fonti": { "ade-portale": "Portale Agenzia delle Entrate", "doctrib": "MEF DocTrib" },
+    "pendingHint": "I passaggi in attesa di embedding non sono raggiungibili dalla ricerca semantica.",
+    "refsValue": "{{mapped}} di {{total}}",
+    "skipped": "Elementi scartati per motivo",
+    "coverage": {
+      "title": "Dichiarati e presi",
+      "window": "Finestra",
+      "declared": "Dichiarati",
+      "taken": "Presi",
+      "missing": "Mancanti",
+      "truncated": "Troncati"
+    },
+    "limits": "Limiti: le pagine mensili del portale partono da metà 2019, circolari e risoluzioni precedenti non sono nel corpus. La ricerca per norma trova solo i riferimenti risolti in un URN: un risultato vuoto NON è una prova che nessun documento citi la norma."
+  }
+}
