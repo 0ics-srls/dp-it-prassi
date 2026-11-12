@@ -1,0 +1,21 @@
+{
+  "description": "Find the prassi documents (circolari, risoluzioni, provvedimenti, interpelli) that cite a norm, by the URN:NIR of an act (urn:nir:stato:legge:2000-07-27;212) or of an article (...;212~art11). An article URN also finds the other articles and the act-level references of the same act. Rows: id, tipo, numero, anno, data, ente, oggetto, source_url and matched_refs (the matching references with descrizione, articolo, comma, norma_urn), ordered by tipo, anno, numero. BEST-EFFORT: only the references that the extractor resolved to a URN are searchable (see it-prassi_status refs_mapped / refs_total); the absence of results is NOT proof that no document mentions the norma. Read a document with it-prassi_doc. Example: {\"norma_urn\": \"urn:nir:stato:decreto.del.presidente.della.repubblica:1972-10-26;633~art19\", \"limit\": 20}.",
+  "version": 1,
+  "parameters": {
+    "type": "object",
+    "required": ["norma_urn"],
+    "properties": {
+      "norma_urn": {
+        "type": "string",
+        "pattern": "^urn:nir:[a-z.]+:[a-z.]+:[0-9]{4}-[0-9]{2}-[0-9]{2};[0-9a-z-]+(~[a-z0-9-]+)?$",
+        "maxLength": 500
+      },
+      "limit": { "type": "integer", "minimum": 1, "maximum": 100, "default": 50 }
+    }
+  },
+  "annotations": { "readOnlyHint": true, "idempotentHint": true },
+  "maxRows": 100,
+  "maxBytes": 1048576,
+  "timeoutMs": 10000,
+  "pagination": "none"
+}

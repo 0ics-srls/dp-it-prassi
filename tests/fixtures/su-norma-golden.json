@@ -1,0 +1,127 @@
+{
+  "_comment": "Produced by dev/p80/make_su_norma_golden.py from the convert class (anchored extractor). No recorded fixture cites the Statuto, so it comes from the subject line of a real interpello.",
+  "documents": [
+    {
+      "name": "circolare-10-2025",
+      "tipo": "circolare",
+      "numero": "10",
+      "anno": 2025,
+      "text_raw": "Circolare n. 10/E del 3 luglio 2025 (testo completo nel fixture PDF)",
+      "riferimenti": [
+        {
+          "ord": 0,
+          "descrizione": "Legge 30 dicembre 2024, n. 207",
+          "articolo": null,
+          "comma": null,
+          "norma_urn": "urn:nir:stato:legge:2024-12-30;207",
+          "via": "numero_data"
+        },
+        {
+          "ord": 1,
+          "descrizione": "Decreto-legge 28 febbraio 2025, n. 19",
+          "articolo": null,
+          "comma": null,
+          "norma_urn": "urn:nir:stato:decreto.legge:2025-02-28;19",
+          "via": "numero_data"
+        },
+        {
+          "ord": 2,
+          "descrizione": "legge 24 aprile 2025, n. 60",
+          "articolo": null,
+          "comma": null,
+          "norma_urn": "urn:nir:stato:legge:2025-04-24;60",
+          "via": "numero_data"
+        },
+        {
+          "ord": 3,
+          "descrizione": "articolo 6, comma 2-bis, del d.l. n. 19 del 2025",
+          "articolo": "6",
+          "comma": "2",
+          "norma_urn": "urn:nir:stato:decreto.legge:2025-02-28;19~art6",
+          "via": "numero_anno"
+        },
+        {
+          "ord": 4,
+          "descrizione": "articolo 51, comma 4, lettera a), del Testo Unico delle imposte sui redditi",
+          "articolo": "51",
+          "comma": "4",
+          "norma_urn": "urn:nir:stato:decreto.del.presidente.della.repubblica:1986-12-22;917~art51",
+          "via": "alias"
+        },
+        {
+          "ord": 5,
+          "descrizione": "decreto del Presidente della Repubblica 22 dicembre 1986, n. 917",
+          "articolo": null,
+          "comma": null,
+          "norma_urn": "urn:nir:stato:decreto.del.presidente.della.repubblica:1986-12-22;917",
+          "via": "numero_data"
+        },
+        {
+          "ord": 6,
+          "descrizione": "articolo 54, comma 1, lettere a), c) e m), del decreto legislativo 30 aprile 1992, n. 2851",
+          "articolo": "54",
+          "comma": "1",
+          "norma_urn": "urn:nir:stato:decreto.legislativo:1992-04-30;285~art54",
+          "via": "numero_data"
+        },
+        {
+          "ord": 7,
+          "descrizione": "articolo 51 del TUIR.",
+          "articolo": "51",
+          "comma": null,
+          "norma_urn": "urn:nir:stato:decreto.del.presidente.della.repubblica:1986-12-22;917~art51",
+          "via": "alias"
+        },
+        {
+          "ord": 8,
+          "descrizione": "articolo 1 della legge 27 dicembre 2019, n. 160",
+          "articolo": "1",
+          "comma": null,
+          "norma_urn": "urn:nir:stato:legge:2019-12-27;160~art1",
+          "via": "numero_data"
+        },
+        {
+          "ord": 9,
+          "descrizione": "articolo 51, comma 3, del TUIR",
+          "articolo": "51",
+          "comma": "3",
+          "norma_urn": "urn:nir:stato:decreto.del.presidente.della.repubblica:1986-12-22;917~art51",
+          "via": "alias"
+        },
+        {
+          "ord": 10,
+          "descrizione": "articolo 1 della legge 30 dicembre 2024, n. 207",
+          "articolo": "1",
+          "comma": null,
+          "norma_urn": "urn:nir:stato:legge:2024-12-30;207~art1",
+          "via": "numero_data"
+        },
+        {
+          "ord": 11,
+          "descrizione": "articolo 9 del medesimo TUIR",
+          "articolo": "9",
+          "comma": null,
+          "norma_urn": "urn:nir:stato:decreto.del.presidente.della.repubblica:1986-12-22;917~art9",
+          "via": "alias"
+        }
+      ]
+    },
+    {
+      "name": "interpello-statuto",
+      "tipo": "interpello",
+      "numero": "1",
+      "anno": 2024,
+      "text_raw": "OGGETTO: Interpello articolo 11, comma 2, legge 27 luglio 2000, n. 212 - disapplicazione di norme antielusive",
+      "riferimenti": [
+        {
+          "ord": 0,
+          "descrizione": "articolo 11, comma 2, legge 27 luglio 2000, n. 212",
+          "articolo": "11",
+          "comma": "2",
+          "norma_urn": "urn:nir:stato:legge:2000-07-27;212~art11",
+          "via": "numero_data"
+        }
+      ]
+    }
+  ]
+}
