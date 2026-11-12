@@ -1,0 +1,14 @@
+{
+  "common": {
+    "loading": "Načítavam...",
+    "error": "Údaje sa nepodarilo načítať.",
+    "retry": "Skúsiť znova",
+    "openSource": "Otvoriť na zdroji",
+    "any": "Všetky",
+    "attribution": "Agenzia delle Entrate (portale) / MEF - def.finanze.it (DocTrib); administratívne akty; text licencie nie je zverejnený.",
+    "notLaw": "Daňová prax NIE JE prameňom práva: vyjadruje výklad správy."
+  },
+  "corpus": { "title": "Daňová prax" },
+  "document": { "title": "Dokument" },
+  "status": { "title": "Stav korpusu" }
+}

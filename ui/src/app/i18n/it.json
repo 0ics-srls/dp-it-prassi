@@ -1,0 +1,14 @@
+{
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Impossibile caricare i dati.",
+    "retry": "Riprova",
+    "openSource": "Apri alla fonte",
+    "any": "Qualsiasi",
+    "attribution": "Agenzia delle Entrate (portale) / MEF - def.finanze.it (DocTrib); atti amministrativi; testo della licenza non pubblicato.",
+    "notLaw": "La prassi NON è una fonte del diritto: esprime l'interpretazione dell'amministrazione."
+  },
+  "corpus": { "title": "Prassi fiscale" },
+  "document": { "title": "Documento" },
+  "status": { "title": "Stato del corpus" }
+}

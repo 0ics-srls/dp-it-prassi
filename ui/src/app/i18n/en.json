@@ -1,0 +1,14 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "The data could not be loaded.",
+    "retry": "Try again",
+    "openSource": "Open at the source",
+    "any": "Any",
+    "attribution": "Agenzia delle Entrate (portale) / MEF - def.finanze.it (DocTrib); administrative acts; licence text not published.",
+    "notLaw": "Tax practice is NOT a source of law: it states the interpretation of the administration."
+  },
+  "corpus": { "title": "Tax practice" },
+  "document": { "title": "Document" },
+  "status": { "title": "Corpus status" }
+}
