@@ -63,7 +63,8 @@
           "refreshToken": { "type": "string" },
           "tokenBudget": { "type": "integer", "minimum": 0, "default": 20000, "description": "Hard stop of Jina tokens per embedding Run" },
           "dryRun": { "type": "boolean", "default": false, "description": "Embedding step plans only: no Jina call, nothing written" }
-        }
+        },
+        "required": ["tipologie"]
       },
       "x-ui": {
         "order": ["tipologie", "annoFrom", "annoTo", "mesi", "skipBefore", "only", "maxDocs", "baseUrl", "refreshToken", "tokenBudget", "dryRun"],
@@ -96,12 +97,13 @@
           "mesi": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 12 }, "uniqueItems": true, "description": "Months 1-12 (default: all)" },
           "only": { "type": "array", "items": { "type": "string", "minLength": 1 }, "description": "Keep only these interpello numbers (sample filter)" },
           "maxItems": { "type": "integer", "minimum": 1, "description": "Sample filter: stop after this many documents per window" },
-          "delaySeconds": { "type": "number", "minimum": 0.5, "default": 0.5 },
+          "delaySeconds": { "type": "number", "minimum": 0.6, "default": 0.6 },
           "verifyTls": { "type": "boolean", "default": true },
           "refreshToken": { "type": "string" },
           "tokenBudget": { "type": "integer", "minimum": 0, "default": 20000, "description": "Hard stop of Jina tokens per embedding Run" },
           "dryRun": { "type": "boolean", "default": false, "description": "Embedding step plans only: no Jina call, nothing written" }
-        }
+        },
+        "required": ["tipoEstremi"]
       },
       "x-ui": {
         "order": ["tipoEstremi", "ente", "annoFrom", "annoTo", "mesi", "only", "maxItems", "delaySeconds", "verifyTls", "refreshToken", "tokenBudget", "dryRun"],
@@ -114,7 +116,7 @@
           "mesi": "Sample filter: months of the year (default all 12)",
           "only": "Sample filter: interpello numbers",
           "maxItems": "Sample filter for the live proof",
-          "delaySeconds": "Pause between requests, at least 0.5 s",
+          "delaySeconds": "Pause between requests to the source, at least 0.6 s",
           "verifyTls": "Leave on: the grab class pins the missing intermediate certificate",
           "refreshToken": "Change this value to fetch all windows again",
           "tokenBudget": "Maximum Jina tokens one Run may spend on embeddings (default 20000)",
@@ -123,6 +125,127 @@
       }
     }
   ],
+  "catalog": {
+    "noveltyKey": "itemId|version",
+    "retryFailed": "newUrlOnly"
+  },
+  "pipeline": [
+    {
+      "step": "detect",
+      "class": "git:github.com/0ics-srls/dp-it-prassi-detect@v0.1.0",
+      "params": {
+        "tipologie": "${source.config.tipologie}",
+        "tipoEstremi": "${source.config.tipoEstremi}",
+        "ente": "${source.config.ente}",
+        "annoFrom": "${source.config.annoFrom}",
+        "annoTo": "${source.config.annoTo}",
+        "mesi": "${source.config.mesi}",
+        "skipBefore": "${source.config.skipBefore}",
+        "only": "${source.config.only}",
+        "maxDocs": "${source.config.maxDocs}",
+        "maxItems": "${source.config.maxItems}",
+        "baseUrl": "${source.config.baseUrl}",
+        "delaySeconds": "${source.config.delaySeconds}",
+        "verifyTls": "${source.config.verifyTls}",
+        "state": "${source.state}",
+        "refreshToken": "${source.config.refreshToken}"
+      },
+      "emits": "catalog",
+      "retry": { "type": "exponential", "maxAttempts": 3, "interval": "PT5M" },
+      "timeout": "PT10M"
+    },
+    {
+      "step": "grab",
+      "class": "git:github.com/0ics-srls/dp-it-prassi-grab@v0.1.0",
+      "perItem": true,
+      "chunkSize": 1,
+      "concurrencyLimit": 1,
+      "params": {
+        "items": "${items}",
+        "dir": "${dataRoot}/dp-it-prassi/${source.id}/raw",
+        "ente": "${source.config.ente}",
+        "only": "${source.config.only}",
+        "maxDocs": "${source.config.maxDocs}",
+        "maxItems": "${source.config.maxItems}",
+        "baseUrl": "${source.config.baseUrl}",
+        "delaySeconds": "${source.config.delaySeconds}",
+        "verifyTls": "${source.config.verifyTls}"
+      },
+      "retry": { "type": "exponential", "maxAttempts": 3, "interval": "PT5M" },
+      "timeout": "PT2H",
+      "allowedHosts": ["www.agenziaentrate.gov.it", "def.finanze.it"]
+    },
+    {
+      "step": "convert",
+      "class": "git:github.com/0ics-srls/dp-it-prassi-convert@v0.1.0",
+      "perItem": true,
+      "chunkSize": 1,
+      "params": {
+        "items": "${items}",
+        "dirIn": "${dataRoot}/dp-it-prassi/${source.id}/raw",
+        "dirOut": "${dataRoot}/dp-it-prassi/${source.id}/plan"
+      },
+      "resources": {
+        "maxMemoryMbytes": 3072,
+        "cpuLimit": 2
+      },
+      "timeout": "PT2H",
+      "heartbeatMaxSeconds": 900
+    },
+    {
+      "step": "ingest",
+      "class": "git:github.com/0ics-srls/dp-it-prassi-ingest@v0.1.0",
+      "perItem": true,
+      "chunkSize": 1,
+      "db": "dataset",
+      "params": {
+        "items": "${items}",
+        "dirIn": "${dataRoot}/dp-it-prassi/${source.id}/plan",
+        "connString": "${dataset.connString}",
+        "schema": "ds_it_prassi"
+      },
+      "timeout": "PT1H",
+      "produces": [
+        "ds_it_prassi.documenti",
+        "ds_it_prassi.passages",
+        "ds_it_prassi.riferimenti_norma",
+        "ds_it_prassi.skipped",
+        "ds_it_prassi.coverage"
+      ]
+    },
+    {
+      "step": "embed",
+      "class": "git:github.com/0ics-srls/dp-lex-embed@dp-p7.1",
+      "perItem": true,
+      "chunkSize": 1,
+      "concurrencyLimit": 1,
+      "db": "dataset",
+      "secrets": ["JINA_API_KEY"],
+      "params": {
+        "items": "${items}",
+        "connString": "${dataset.connString}",
+        "table": "ds_it_prassi.passages",
+        "keyColumn": "id",
+        "textColumns": ["text_contextual"],
+        "vectorColumn": "embedding",
+        "tokenBudget": "${source.config.tokenBudget}",
+        "dryRun": "${source.config.dryRun}",
+        "jinaApiKey": "${secret.JINA_API_KEY}"
+      },
+      "retry": { "type": "exponential", "maxAttempts": 3, "interval": "PT2M" },
+      "timeout": "PT30M",
+      "heartbeatMaxSeconds": 600,
+      "produces": ["ds_it_prassi.passages"]
+    }
+  ],
+  "releases": {
+    "breakingChanges": {
+      "0.1.0": {
+        "message": "Initial release: Agenzia delle Entrate circolari, risoluzioni and provvedimenti and MEF DocTrib interpelli (detect, grab, convert with local OCR, ingest, embed), schema ds_it_prassi with 5 tables",
+        "scopedImpact": "new package"
+      }
+    }
+  },
   "dataset": {
     "schema": "ds_it_prassi",
     "migrations": "schema/migrations",
