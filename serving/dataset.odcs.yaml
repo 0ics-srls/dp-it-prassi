@@ -31,6 +31,8 @@ schema:
         value: fts
       - property: ftsField
         value: search_vector
+      - property: ftsConfig
+        value: italian
     properties:
       - name: id
         logicalType: string
