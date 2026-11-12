@@ -1,6 +1,6 @@
 # dp-it-prassi
 
-Data Platform package `it-prassi` (0.1.0): the Italian tax practice (prassi) as a searchable corpus with norm references.
+Data Platform package `it-prassi` (0.2.1): the Italian tax practice (prassi) as a searchable corpus with norm references.
 
 ## Purpose
 
@@ -40,7 +40,7 @@ embedding service.
 | --- | --- | --- |
 | detect | `dp-it-prassi-detect@v0.1.0` | lists the month pages and the DocTrib windows; one catalog item per document and version (`itemId|version`) |
 | grab | `dp-it-prassi-grab@v0.1.0` | downloads the PDF of one item and writes the coverage (declared versus taken) |
-| convert | `dp-it-prassi-convert@v0.1.0` | extracts the text (pypdfium2 text layer, local tesseract OCR for scans), the estremi and the norm references; writes a plan |
+| convert | `dp-it-prassi-convert@v0.1.2` | extracts the text (pypdfium2 text layer, local tesseract OCR for scans), the estremi and the norm references; writes a plan |
 | ingest | `dp-it-prassi-ingest@v0.1.0` | applies the plan to the dataset: documents, passages, references, skipped, coverage |
 | embed | `dp-lex-embed@dp-p7.1` | embeds the passages that have no vector yet (`passages.embedding`, 1024 dimensions) |
 
