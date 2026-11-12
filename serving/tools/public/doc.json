@@ -1,0 +1,27 @@
+{
+  "description": "Read one document of the Italian tax practice (prassi) with its text in slices. Give the id (uuid from it-prassi_search or it-prassi_lookup) or the natural key tipo + numero + anno (the key can match several rows, e.g. a circolare and its English version). Returns the extremes (ente, struttura, tipo, numero, anno, data, oggetto, source_url), the text slice (offset 0-based, length 1..50000 characters, default 20000), text_length, truncated and next_offset (the offset of the next slice, null at the end), estrazione (testo = PDF text layer, ocr = local OCR) and the norm references riferimenti [{descrizione, articolo, comma, norma_urn}] (norma_urn only when resolved; best-effort). No row means the document is not in the corpus. Prassi is the administration's interpretation, not a source of law. Example: {\"id\": \"3f2c...\", \"offset\": 20000}.",
+  "version": 1,
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+      },
+      "tipo": { "type": "string", "maxLength": 50 },
+      "numero": { "type": "string", "maxLength": 30 },
+      "anno": { "type": "integer" },
+      "offset": { "type": "integer", "minimum": 0, "default": 0 },
+      "length": { "type": "integer", "minimum": 1, "maximum": 50000, "default": 20000 }
+    },
+    "anyOf": [
+      { "required": ["id"] },
+      { "required": ["tipo", "numero", "anno"] }
+    ]
+  },
+  "annotations": { "readOnlyHint": true, "idempotentHint": true },
+  "maxRows": 5,
+  "maxBytes": 1048576,
+  "timeoutMs": 10000,
+  "pagination": "none"
+}
