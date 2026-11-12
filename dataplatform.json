@@ -1,0 +1,131 @@
+{
+  "$schema": "https://schemas.dataplatform.0ics.ai/dataplatform/1.json",
+  "name": "it-prassi",
+  "version": "0.1.0",
+  "hostApi": "1",
+  "sources": [
+    {
+      "title": "Agenzia delle Entrate - portale (circolari, risoluzioni, provvedimenti)",
+      "path": "https://www.agenziaentrate.gov.it/",
+      "licenses": [
+        {
+          "name": "source-terms-not-published",
+          "title": "Agenzia delle Entrate portal; official acts, art. 5 L. 633/1941; no licence text published",
+          "path": "https://www.agenziaentrate.gov.it/"
+        }
+      ]
+    },
+    {
+      "title": "MEF - def.finanze.it DocTrib prassi (interpelli)",
+      "path": "https://def.finanze.it/",
+      "licenses": [
+        {
+          "name": "source-terms-not-published",
+          "title": "MEF/CeRDEF DocTrib; terms not found",
+          "path": "https://def.finanze.it/"
+        }
+      ]
+    }
+  ],
+  "sourceTypes": [
+    {
+      "key": "ade-portale",
+      "title": "Agenzia delle Entrate portal month pages (circolari, risoluzioni, provvedimenti)",
+      "configSchema": {
+        "type": "object",
+        "properties": {
+          "tipologie": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["circolari", "risoluzioni", "provvedimenti"] },
+            "minItems": 1,
+            "uniqueItems": true,
+            "default": ["circolari", "risoluzioni", "provvedimenti"]
+          },
+          "annoFrom": { "type": "integer", "minimum": 2000, "maximum": 2100, "description": "First year (default: the current year)" },
+          "annoTo": { "type": "integer", "minimum": 2000, "maximum": 2100, "description": "Last year (default: the current year)" },
+          "mesi": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 12 }, "uniqueItems": true, "description": "Months 1-12 (default: all)" },
+          "skipBefore": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$", "default": "2019-06", "description": "Month pages exist from mid-2019; earlier months are not listed" },
+          "only": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tipo": { "type": "string", "enum": ["circolari", "risoluzioni", "provvedimenti"] },
+                "stem": { "type": "string", "minLength": 1 }
+              },
+              "required": ["tipo", "stem"],
+              "additionalProperties": false
+            },
+            "description": "Keep only these documents (PDF file name without extension; sample filter)"
+          },
+          "maxDocs": { "type": "integer", "minimum": 1, "description": "Sample filter: stop after this many documents per month page" },
+          "baseUrl": { "type": "string", "default": "https://www.agenziaentrate.gov.it/portale", "description": "Portal base URL (replay server in tests)" },
+          "refreshToken": { "type": "string" },
+          "tokenBudget": { "type": "integer", "minimum": 0, "default": 20000, "description": "Hard stop of Jina tokens per embedding Run" },
+          "dryRun": { "type": "boolean", "default": false, "description": "Embedding step plans only: no Jina call, nothing written" }
+        }
+      },
+      "x-ui": {
+        "order": ["tipologie", "annoFrom", "annoTo", "mesi", "skipBefore", "only", "maxDocs", "baseUrl", "refreshToken", "tokenBudget", "dryRun"],
+        "labels": { "tipologie": "Document types", "annoFrom": "From year", "annoTo": "To year", "mesi": "Months", "skipBefore": "Skip months before", "only": "Only these documents", "maxDocs": "Max documents per month", "baseUrl": "Portal base URL", "refreshToken": "Refresh token", "tokenBudget": "Embedding token budget", "dryRun": "Embedding dry run" },
+        "help": {
+          "tipologie": "circolari, risoluzioni, provvedimenti of the Agenzia delle Entrate portal",
+          "annoFrom": "First year of the range (default current year)",
+          "annoTo": "Last year of the range (default current year)",
+          "mesi": "Sample filter: months of the year (default all 12)",
+          "skipBefore": "The portal month pages exist from mid-2019 (YYYY-MM)",
+          "only": "Sample filter: PDF file names (without .pdf) per type",
+          "maxDocs": "Sample filter for the live proof",
+          "baseUrl": "Only change for a replay server",
+          "refreshToken": "Change this value to fetch all month pages again",
+          "tokenBudget": "Maximum Jina tokens one Run may spend on embeddings (default 20000)",
+          "dryRun": "Plan the embeddings without calling Jina"
+        }
+      }
+    },
+    {
+      "key": "doctrib-prassi",
+      "title": "MEF DocTrib prassi (interpelli of the Agenzia delle Entrate)",
+      "configSchema": {
+        "type": "object",
+        "properties": {
+          "tipoEstremi": { "type": "array", "items": { "type": "string", "enum": ["Interpello"] }, "minItems": 1, "uniqueItems": true, "default": ["Interpello"] },
+          "ente": { "type": "string", "default": "Agenzia delle Entrate" },
+          "annoFrom": { "type": "integer", "minimum": 2000, "maximum": 2100, "description": "First year (default: the current year)" },
+          "annoTo": { "type": "integer", "minimum": 2000, "maximum": 2100, "description": "Last year (default: the current year)" },
+          "mesi": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 12 }, "uniqueItems": true, "description": "Months 1-12 (default: all)" },
+          "only": { "type": "array", "items": { "type": "string", "minLength": 1 }, "description": "Keep only these interpello numbers (sample filter)" },
+          "maxItems": { "type": "integer", "minimum": 1, "description": "Sample filter: stop after this many documents per window" },
+          "delaySeconds": { "type": "number", "minimum": 0.5, "default": 0.5 },
+          "verifyTls": { "type": "boolean", "default": true },
+          "refreshToken": { "type": "string" },
+          "tokenBudget": { "type": "integer", "minimum": 0, "default": 20000, "description": "Hard stop of Jina tokens per embedding Run" },
+          "dryRun": { "type": "boolean", "default": false, "description": "Embedding step plans only: no Jina call, nothing written" }
+        }
+      },
+      "x-ui": {
+        "order": ["tipoEstremi", "ente", "annoFrom", "annoTo", "mesi", "only", "maxItems", "delaySeconds", "verifyTls", "refreshToken", "tokenBudget", "dryRun"],
+        "labels": { "tipoEstremi": "Document types", "ente": "Authority", "annoFrom": "From year", "annoTo": "To year", "mesi": "Months", "only": "Only these numbers", "maxItems": "Max documents", "delaySeconds": "Pause between requests (s)", "verifyTls": "Verify TLS", "refreshToken": "Refresh token", "tokenBudget": "Embedding token budget", "dryRun": "Embedding dry run" },
+        "help": {
+          "tipoEstremi": "DocTrib estremi type (Interpello)",
+          "ente": "Issuing authority filter",
+          "annoFrom": "First year of the range (default current year)",
+          "annoTo": "Last year of the range (default current year)",
+          "mesi": "Sample filter: months of the year (default all 12)",
+          "only": "Sample filter: interpello numbers",
+          "maxItems": "Sample filter for the live proof",
+          "delaySeconds": "Pause between requests, at least 0.5 s",
+          "verifyTls": "Leave on: the grab class pins the missing intermediate certificate",
+          "refreshToken": "Change this value to fetch all windows again",
+          "tokenBudget": "Maximum Jina tokens one Run may spend on embeddings (default 20000)",
+          "dryRun": "Plan the embeddings without calling Jina"
+        }
+      }
+    }
+  ],
+  "dataset": {
+    "schema": "ds_it_prassi",
+    "migrations": "schema/migrations",
+    "contract": "serving/dataset.odcs.yaml"
+  }
+}
