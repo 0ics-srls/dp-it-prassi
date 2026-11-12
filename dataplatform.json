@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.dataplatform.0ics.ai/dataplatform/1.json",
   "name": "it-prassi",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "hostApi": "1",
   "sources": [
     {
@@ -177,7 +177,7 @@
     },
     {
       "step": "convert",
-      "class": "git:github.com/0ics-srls/dp-it-prassi-convert@v0.1.0",
+      "class": "git:github.com/0ics-srls/dp-it-prassi-convert@v0.1.2",
       "perItem": true,
       "chunkSize": 1,
       "params": {
@@ -279,6 +279,10 @@
   },
   "releases": {
     "breakingChanges": {
+      "0.2.1": {
+        "message": "Fix of the live proof: the subject (oggetto) of a document joins the lines the PDF text wraps it over (it was cut at the first line), and the title paragraph is the subject of a provvedimento; convert class 0.1.2; no Tool, column or table is changed",
+        "scopedImpact": "it-prassi documents (oggetto)"
+      },
       "0.2.0": {
         "message": "Screens added: tax practice list with search, filters and lookup by estremi, document detail with text slices and norm references, corpus status (Console menu Italian tax practice); no Tool, column or table is changed",
         "scopedImpact": "it-prassi UI"
