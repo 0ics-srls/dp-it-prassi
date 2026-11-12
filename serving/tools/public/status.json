@@ -1,0 +1,13 @@
+{
+  "description": "Real coverage of the prassi corpus, computed from the data: one row per source and document type with counts (documents, OCR documents, passages, passages still without embedding, norm references total and resolved to an URN, skipped items by reason, duplicate identity groups), the year range, the last ingestion, the declared-versus-taken coverage per month and a note with the honest limits. An empty corpus answers one row of zeros. No parameters.",
+  "version": 1,
+  "parameters": {
+    "type": "object",
+    "properties": {}
+  },
+  "annotations": { "readOnlyHint": true, "idempotentHint": true },
+  "maxRows": 12,
+  "maxBytes": 262144,
+  "timeoutMs": 10000,
+  "pagination": "none"
+}
