@@ -64,5 +64,34 @@
       "note": "Best effort: si trovano solo i riferimenti che l'estrattore ha risolto in un URN. Un risultato vuoto NON è una prova che nessun documento citi la norma."
     }
   },
-  "status": { "title": "Stato del corpus" }
+  "status": {
+    "title": "Stato del corpus",
+    "refresh": "Aggiorna",
+    "empty": "Ancora nessun documento: il primo import non è ancora avvenuto.",
+    "columns": {
+      "fonte": "Fonte",
+      "tipo": "Tipo",
+      "documents": "Documenti",
+      "years": "Anni",
+      "ocr": "OCR",
+      "passages": "Passaggi",
+      "pending": "Senza embedding",
+      "refs": "Riferimenti risolti",
+      "duplicates": "Gruppi duplicati",
+      "lastIngested": "Ultimo import"
+    },
+    "fonti": { "ade-portale": "Portale Agenzia delle Entrate", "doctrib": "MEF DocTrib" },
+    "pendingHint": "I passaggi in attesa di embedding non sono raggiungibili dalla ricerca semantica.",
+    "refsValue": "{{mapped}} di {{total}}",
+    "skipped": "Elementi scartati per motivo",
+    "coverage": {
+      "title": "Dichiarati e presi",
+      "window": "Finestra",
+      "declared": "Dichiarati",
+      "taken": "Presi",
+      "missing": "Mancanti",
+      "truncated": "Troncati"
+    },
+    "limits": "Limiti: le pagine mensili del portale partono da metà 2019, circolari e risoluzioni precedenti non sono nel corpus. La ricerca per norma trova solo i riferimenti risolti in un URN: un risultato vuoto NON è una prova che nessun documento citi la norma."
+  }
 }

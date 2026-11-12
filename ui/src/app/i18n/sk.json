@@ -64,5 +64,34 @@
       "note": "Best effort: nájsť možno len odkazy, ktoré extraktor vyriešil na URN. Prázdny výsledok NIE JE dôkaz, že normu nikto necituje."
     }
   },
-  "status": { "title": "Stav korpusu" }
+  "status": {
+    "title": "Stav korpusu",
+    "refresh": "Obnoviť",
+    "empty": "Zatiaľ žiadne dokumenty: prvý import ešte nebežal.",
+    "columns": {
+      "fonte": "Zdroj",
+      "tipo": "Druh",
+      "documents": "Dokumenty",
+      "years": "Roky",
+      "ocr": "OCR",
+      "passages": "Pasáže",
+      "pending": "Bez embeddingu",
+      "refs": "Vyriešené odkazy",
+      "duplicates": "Skupiny duplicít",
+      "lastIngested": "Posledný import"
+    },
+    "fonti": { "ade-portale": "Portál Agenzia delle Entrate", "doctrib": "MEF DocTrib" },
+    "pendingHint": "Pasáže čakajúce na embedding nie sú dostupné sémantickému hľadaniu.",
+    "refsValue": "{{mapped}} z {{total}}",
+    "skipped": "Preskočené položky podľa dôvodu",
+    "coverage": {
+      "title": "Deklarované a prevzaté",
+      "window": "Okno",
+      "declared": "Deklarované",
+      "taken": "Prevzaté",
+      "missing": "Chýba",
+      "truncated": "Skrátené"
+    },
+    "limits": "Obmedzenia: mesačné stránky portálu začínajú v polovici roka 2019, staršie circolari a risoluzioni v korpuse nie sú. Hľadanie podľa normy nájde len odkazy vyriešené na URN: prázdny výsledok NIE JE dôkaz, že normu nikto necituje."
+  }
 }

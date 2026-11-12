@@ -90,3 +90,49 @@ export function normaWire(over: WireRow = {}): WireRow {
     ...over,
   };
 }
+
+/** One declared-versus-taken window of `status.coverage`. */
+export function coverageWire(over: WireRow = {}): WireRow {
+  return { anno: 2025, mese: 7, dichiarati: 3, presi: 3, mancanti: 0, troncati: 0, ...over };
+}
+
+/** One (fonte, tipo) row of `status`; the jsonb members arrive as JSON values (D114). */
+export function statusWire(over: WireRow = {}): WireRow {
+  return {
+    fonte: 'ade-portale',
+    tipo: 'circolare',
+    documents: 120,
+    year_min: 2019,
+    year_max: 2025,
+    ocr_documents: 7,
+    passages: 900,
+    passages_pending: 0,
+    refs_total: 400,
+    refs_mapped: 250,
+    skipped: { ocr_empty: 2, senza_pdf: 1 },
+    duplicate_identity_groups: 0,
+    last_ingested_at: '2026-11-10T08:30:00Z',
+    note: 'Riferimenti normativi risolti in URN: 250 su 400. Interpelli: 2023-2025.',
+    coverage: [coverageWire(), coverageWire({ mese: 8, dichiarati: 5, presi: 3, mancanti: 2 })],
+    ...over,
+  };
+}
+
+/** The single row the Tool answers on an empty corpus. */
+export function emptyStatusWire(): WireRow {
+  return statusWire({
+    fonte: null,
+    tipo: null,
+    documents: 0,
+    year_min: null,
+    year_max: null,
+    ocr_documents: 0,
+    passages: 0,
+    refs_total: 0,
+    refs_mapped: 0,
+    skipped: {},
+    last_ingested_at: null,
+    note: 'Nessun documento nel corpus: il primo import non e ancora avvenuto.',
+    coverage: [],
+  });
+}

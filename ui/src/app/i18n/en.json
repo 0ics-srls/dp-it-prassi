@@ -64,5 +64,34 @@
       "note": "Best effort: only the references that the extractor resolved to an URN can be found. An empty result is NOT proof that no document cites the norm."
     }
   },
-  "status": { "title": "Corpus status" }
+  "status": {
+    "title": "Corpus status",
+    "refresh": "Refresh",
+    "empty": "No documents yet: the first import has not run.",
+    "columns": {
+      "fonte": "Source",
+      "tipo": "Type",
+      "documents": "Documents",
+      "years": "Years",
+      "ocr": "OCR",
+      "passages": "Passages",
+      "pending": "Without embedding",
+      "refs": "References resolved",
+      "duplicates": "Duplicate groups",
+      "lastIngested": "Last ingest"
+    },
+    "fonti": { "ade-portale": "Agenzia delle Entrate portal", "doctrib": "MEF DocTrib" },
+    "pendingHint": "Passages that wait for an embedding are not reachable by the semantic search.",
+    "refsValue": "{{mapped}} of {{total}}",
+    "skipped": "Skipped items by reason",
+    "coverage": {
+      "title": "Declared against taken",
+      "window": "Window",
+      "declared": "Declared",
+      "taken": "Taken",
+      "missing": "Missing",
+      "truncated": "Truncated"
+    },
+    "limits": "Limits: the portal month pages start in mid-2019, earlier circolari and risoluzioni are not in the corpus. The search by norm finds only references resolved to an URN: an empty result is NOT proof that no document cites the norm."
+  }
 }
