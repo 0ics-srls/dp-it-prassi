@@ -241,7 +241,7 @@
   "releases": {
     "breakingChanges": {
       "0.1.0": {
-        "message": "Initial release: Agenzia delle Entrate circolari, risoluzioni and provvedimenti and MEF DocTrib interpelli (detect, grab, convert with local OCR, ingest, embed), schema ds_it_prassi with 5 tables",
+        "message": "Initial release: Agenzia delle Entrate circolari, risoluzioni and provvedimenti and MEF DocTrib interpelli (detect, grab, convert with local OCR, ingest, embed), schema ds_it_prassi with 5 tables, 6 Tools (search, doc, su_norma, lookup, guide, status), no Screens yet",
         "scopedImpact": "new package"
       }
     }
