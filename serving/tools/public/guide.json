@@ -1,0 +1,12 @@
+{
+  "description": "How to use the prassi corpus (circolari, risoluzioni, provvedimenti of the Agenzia delle Entrate and interpelli of the MEF DocTrib): what it holds, which Tool to call for what, how to read the results and the honest limits. One row with the Italian text. No parameters.",
+  "version": 1,
+  "parameters": {
+    "type": "object",
+    "properties": {}
+  },
+  "annotations": { "readOnlyHint": true, "idempotentHint": true },
+  "maxRows": 1,
+  "timeoutMs": 5000,
+  "pagination": "none"
+}

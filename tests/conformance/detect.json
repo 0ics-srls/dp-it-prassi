@@ -1,0 +1,5 @@
+{
+  "check": { "tipologie": ["risoluzioni"], "annoFrom": 2025, "annoTo": 2025, "mesi": [10] },
+  "run": { "tipologie": ["risoluzioni"], "annoFrom": 2025, "annoTo": 2025, "mesi": [10] },
+  "expect": { "minItems": 1 }
+}

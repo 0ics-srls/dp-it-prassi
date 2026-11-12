@@ -1,0 +1,25 @@
+{
+  "description": "Search the Italian tax practice (prassi): circolari, risoluzioni, provvedimenti of the Agenzia delle Entrate and interpelli answers of the MEF DocTrib. Hybrid mode fuses full-text (italian, oggetto + text) and vector ranking over the passages with reciprocal rank fusion. Each hit gives the extremes (id, tipo, numero, anno, data, ente, oggetto), a highlight (headline, only for a full-text match), a short snippet (best passage, at most 700 characters) and the source_url; read the full text with it-prassi_doc by id. Parameters: query (web-search syntax), k (1..50, default 10), mode (hybrid, lexical, semantic), filters tipo (circolare, risoluzione, provvedimento, interpello; case-insensitive), ente (substring), anno_from and anno_to. With no query the documents are listed by tipo, anno, numero (a call without any parameter lists the first page). Prassi is the administration's interpretation, not a source of law. Example: {\"query\": \"regime impatriati\", \"tipo\": \"interpello\", \"anno_from\": 2024}.",
+  "version": 1,
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "maxLength": 1000,
+        "x-embed": { "into": "q_vec", "column": "passages.embedding", "model": "jina-embeddings-v3" }
+      },
+      "k": { "type": "integer", "minimum": 1, "maximum": 50, "default": 10 },
+      "mode": { "type": "string", "enum": ["hybrid", "lexical", "semantic"], "default": "hybrid" },
+      "tipo": { "type": "string", "maxLength": 50 },
+      "ente": { "type": "string", "maxLength": 200 },
+      "anno_from": { "type": "integer" },
+      "anno_to": { "type": "integer" }
+    }
+  },
+  "annotations": { "readOnlyHint": true, "idempotentHint": true },
+  "maxRows": 50,
+  "maxBytes": 1048576,
+  "timeoutMs": 15000,
+  "pagination": "none"
+}

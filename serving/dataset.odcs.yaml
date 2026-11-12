@@ -1,0 +1,238 @@
+apiVersion: v3.2.0
+kind: DataContract
+id: urn:dataplatform:ds_it_prassi
+name: Italian tax practice (Agenzia delle Entrate circolari, risoluzioni, provvedimenti; interpelli)
+version: 0.1.0
+status: active
+domain: legal
+description:
+  purpose: Administrative practice (prassi) of the Agenzia delle Entrate - circolari, risoluzioni, provvedimenti from the portal and interpelli answers from MEF DocTrib - with full-text index, embeddable passages and the norm references cited by each document.
+  usage: Read through the Tools of the it-prassi package.
+  limitations: Month pages exist from mid-2019; interpelli are collected for the configured years only; prassi before 2013 and of other authorities is not in the corpus; norm references are best-effort (only the ones resolved to a URN are searchable by norm); administrative prassi is not a source of law.
+team:
+  name: 0ics data platform
+  members:
+    - username: operator
+      role: owner
+slaProperties:
+  - property: freshness
+    value: 30
+    unit: d
+    description: New acts appear month by month; a monthly re-check is enough.
+customProperties:
+  - property: license
+    value: mixed-per-source-see-manifest
+schema:
+  - name: documenti
+    physicalName: documenti
+    description: Circolari, risoluzioni, provvedimenti and interpelli. Identity is (fonte, source_id). The full text is served by the doc Tool in slices only.
+    customProperties:
+      - property: search
+        value: fts
+      - property: ftsField
+        value: search_vector
+    properties:
+      - name: id
+        logicalType: string
+        physicalType: uuid
+        primaryKey: true
+      - name: ente
+        logicalType: string
+        physicalType: text
+        description: Issuing authority
+      - name: struttura
+        logicalType: string
+        physicalType: text
+        description: Issuing office (DocTrib interpelli)
+      - name: tipo
+        logicalType: string
+        physicalType: text
+        description: circolare, risoluzione, provvedimento or interpello (lower-case)
+      - name: numero
+        logicalType: string
+        physicalType: text
+        description: Number or protocol as printed (text; absent for some provvedimenti)
+      - name: anno
+        logicalType: integer
+        physicalType: integer
+      - name: data
+        logicalType: date
+        physicalType: date
+      - name: oggetto
+        logicalType: string
+        physicalType: text
+        description: Subject line
+      - name: text_raw
+        logicalType: string
+        physicalType: text
+        description: Full text of the act (PDF text layer or local OCR)
+        customProperties:
+          - property: largeValue
+            value: true
+      - name: estrazione
+        logicalType: string
+        physicalType: text
+        description: testo (PDF text layer) or ocr (local tesseract)
+      - name: fonte
+        logicalType: string
+        physicalType: text
+        description: ade-portale or doctrib
+      - name: source_id
+        logicalType: string
+        physicalType: text
+        description: PDF file name stem (AdE) or DocTrib GUID without braces
+      - name: source_url
+        logicalType: string
+        physicalType: text
+        description: Link to the act at the source
+      - name: ingested_at
+        logicalType: timestamp
+        physicalType: timestamptz
+      - name: search_vector
+        logicalType: string
+        physicalType: tsvector
+        description: Generated italian full-text vector of oggetto and text_raw
+  - name: passages
+    physicalName: passages
+    description: Embeddable passages of the documents. The text is never returned by generated Tools.
+    customProperties:
+      - property: search
+        value: vector
+      - property: embeddingField
+        value: embedding
+      - property: embeddingModel
+        value: jina-embeddings-v3
+    properties:
+      - name: id
+        logicalType: integer
+        physicalType: bigint
+        primaryKey: true
+      - name: documento_id
+        logicalType: string
+        physicalType: uuid
+        description: Parent documenti.id
+      - name: seq
+        logicalType: integer
+        physicalType: integer
+      - name: text
+        logicalType: string
+        physicalType: text
+        customProperties:
+          - property: largeValue
+            value: true
+      - name: text_contextual
+        logicalType: string
+        physicalType: text
+        description: Passage text prefixed with the estremi of the document (what is embedded)
+        customProperties:
+          - property: largeValue
+            value: true
+      - name: embedding
+        logicalType: array
+        physicalType: vector(1024)
+  - name: riferimenti_norma
+    physicalName: riferimenti_norma
+    description: Norm references cited by a document. descrizione is the raw citation; norma_urn is set only when the extractor resolved it unambiguously (best-effort).
+    properties:
+      - name: id
+        logicalType: integer
+        physicalType: bigint
+        primaryKey: true
+      - name: documento_id
+        logicalType: string
+        physicalType: uuid
+      - name: ord
+        logicalType: integer
+        physicalType: integer
+      - name: descrizione
+        logicalType: string
+        physicalType: text
+      - name: articolo
+        logicalType: string
+        physicalType: text
+      - name: comma
+        logicalType: string
+        physicalType: text
+      - name: norma_urn
+        logicalType: string
+        physicalType: text
+        description: Best-effort URN of the cited norm (legge, d.lgs., d.l., d.P.R., named fiscal acts)
+        customProperties:
+          - property: identifierScheme
+            value: urn:nir
+          - property: references
+            value:
+              dataset: it-normativa
+              field: units.urn
+              identifierScheme: urn:nir
+      - name: via
+        logicalType: string
+        physicalType: text
+        description: alias, numero_data or numero_anno
+      - name: norma_act_urn
+        logicalType: string
+        physicalType: text
+        description: Generated act part of norma_urn
+        customProperties:
+          - property: identifierScheme
+            value: urn:nir
+          - property: references
+            value:
+              dataset: it-normativa
+              field: acts.act_urn
+              identifierScheme: urn:nir
+  - name: skipped
+    physicalName: skipped
+    description: Items seen but not turned into a document, with the reason.
+    properties:
+      - name: id
+        logicalType: integer
+        physicalType: bigint
+        primaryKey: true
+      - name: fonte
+        logicalType: string
+        physicalType: text
+      - name: item_ref
+        logicalType: string
+        physicalType: text
+      - name: reason
+        logicalType: string
+        physicalType: text
+      - name: seen_at
+        logicalType: timestamp
+        physicalType: timestamptz
+  - name: coverage
+    physicalName: coverage
+    description: Declared versus taken documents per source window (month).
+    properties:
+      - name: id
+        logicalType: integer
+        physicalType: bigint
+        primaryKey: true
+      - name: fonte
+        logicalType: string
+        physicalType: text
+      - name: tipo
+        logicalType: string
+        physicalType: text
+      - name: anno
+        logicalType: integer
+        physicalType: integer
+      - name: mese
+        logicalType: integer
+        physicalType: integer
+      - name: dichiarati
+        logicalType: integer
+        physicalType: integer
+      - name: presi
+        logicalType: integer
+        physicalType: integer
+      - name: mancanti
+        logicalType: integer
+        physicalType: integer
+      - name: troncati
+        logicalType: integer
+        physicalType: integer
+      - name: noted_at
+        logicalType: timestamp
+        physicalType: timestamptz
