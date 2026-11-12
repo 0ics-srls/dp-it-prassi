@@ -3,12 +3,41 @@
     "loading": "Caricamento...",
     "error": "Impossibile caricare i dati.",
     "retry": "Riprova",
+    "previous": "Precedente",
+    "next": "Successiva",
+    "pager": "Pagine",
+    "range": "{{from}}-{{to}} di {{total}}",
     "openSource": "Apri alla fonte",
     "any": "Qualsiasi",
     "attribution": "Agenzia delle Entrate (portale) / MEF - def.finanze.it (DocTrib); atti amministrativi; testo della licenza non pubblicato.",
     "notLaw": "La prassi NON è una fonte del diritto: esprime l'interpretazione dell'amministrazione."
   },
-  "corpus": { "title": "Prassi fiscale" },
+  "corpus": {
+    "title": "Prassi fiscale",
+    "search": "Cerca nei documenti",
+    "searchPlaceholder": "es. fringe benefit",
+    "mode": "Modalità",
+    "modes": { "hybrid": "hybrid", "lexical": "lexical", "semantic": "semantic" },
+    "modeShown": "Modalità di ricerca: {{mode}}",
+    "tipo": "Tipo",
+    "tipi": { "circolare": "Circolare", "risoluzione": "Risoluzione", "provvedimento": "Provvedimento", "interpello": "Interpello" },
+    "ente": "Ente",
+    "annoFrom": "Anno da",
+    "annoTo": "Anno a",
+    "sort": "Ordina per",
+    "sorts": { "tipo": "tipo", "anno": "anno", "numero": "numero", "data": "data" },
+    "desc": "Decrescente",
+    "estremi": {
+      "title": "Cerca per estremi",
+      "numero": "Numero",
+      "numeroPlaceholder": "es. 10 oppure 6/E",
+      "anno": "Anno",
+      "go": "Cerca",
+      "clear": "Torna all'elenco"
+    },
+    "degraded": "La parte semantica della ricerca non è disponibile: i risultati sono solo lessicali.",
+    "empty": "Nessun documento trovato."
+  },
   "document": { "title": "Documento" },
   "status": { "title": "Stato del corpus" }
 }

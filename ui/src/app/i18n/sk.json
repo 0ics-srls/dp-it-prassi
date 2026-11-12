@@ -3,12 +3,41 @@
     "loading": "Načítavam...",
     "error": "Údaje sa nepodarilo načítať.",
     "retry": "Skúsiť znova",
+    "previous": "Predchádzajúca",
+    "next": "Ďalšia",
+    "pager": "Stránky",
+    "range": "{{from}}-{{to}} z {{total}}",
     "openSource": "Otvoriť na zdroji",
     "any": "Všetky",
     "attribution": "Agenzia delle Entrate (portale) / MEF - def.finanze.it (DocTrib); administratívne akty; text licencie nie je zverejnený.",
     "notLaw": "Daňová prax NIE JE prameňom práva: vyjadruje výklad správy."
   },
-  "corpus": { "title": "Daňová prax" },
+  "corpus": {
+    "title": "Daňová prax",
+    "search": "Hľadať v dokumentoch",
+    "searchPlaceholder": "napr. fringe benefit",
+    "mode": "Režim",
+    "modes": { "hybrid": "hybrid", "lexical": "lexical", "semantic": "semantic" },
+    "modeShown": "Režim hľadania: {{mode}}",
+    "tipo": "Druh",
+    "tipi": { "circolare": "Circolare", "risoluzione": "Risoluzione", "provvedimento": "Provvedimento", "interpello": "Interpello" },
+    "ente": "Orgán",
+    "annoFrom": "Rok od",
+    "annoTo": "Rok do",
+    "sort": "Zoradiť podľa",
+    "sorts": { "tipo": "druhu", "anno": "roku", "numero": "čísla", "data": "dátumu" },
+    "desc": "Zostupne",
+    "estremi": {
+      "title": "Nájsť podľa údajov dokumentu",
+      "numero": "Číslo",
+      "numeroPlaceholder": "napr. 10 alebo 6/E",
+      "anno": "Rok",
+      "go": "Nájsť",
+      "clear": "Späť na zoznam"
+    },
+    "degraded": "Sémantická časť hľadania nie je dostupná: výsledky sú len lexikálne.",
+    "empty": "Nenašli sa žiadne dokumenty."
+  },
   "document": { "title": "Dokument" },
   "status": { "title": "Stav korpusu" }
 }

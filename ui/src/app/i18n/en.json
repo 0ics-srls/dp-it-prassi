@@ -3,12 +3,41 @@
     "loading": "Loading...",
     "error": "The data could not be loaded.",
     "retry": "Try again",
+    "previous": "Previous",
+    "next": "Next",
+    "pager": "Pages",
+    "range": "{{from}}-{{to}} of {{total}}",
     "openSource": "Open at the source",
     "any": "Any",
     "attribution": "Agenzia delle Entrate (portale) / MEF - def.finanze.it (DocTrib); administrative acts; licence text not published.",
     "notLaw": "Tax practice is NOT a source of law: it states the interpretation of the administration."
   },
-  "corpus": { "title": "Tax practice" },
+  "corpus": {
+    "title": "Tax practice",
+    "search": "Search the documents",
+    "searchPlaceholder": "e.g. fringe benefit",
+    "mode": "Mode",
+    "modes": { "hybrid": "hybrid", "lexical": "lexical", "semantic": "semantic" },
+    "modeShown": "Search mode: {{mode}}",
+    "tipo": "Type",
+    "tipi": { "circolare": "Circolare", "risoluzione": "Risoluzione", "provvedimento": "Provvedimento", "interpello": "Interpello" },
+    "ente": "Authority",
+    "annoFrom": "Year from",
+    "annoTo": "Year to",
+    "sort": "Sort by",
+    "sorts": { "tipo": "type", "anno": "year", "numero": "number", "data": "date" },
+    "desc": "Descending",
+    "estremi": {
+      "title": "Find by estremi",
+      "numero": "Number",
+      "numeroPlaceholder": "e.g. 10 or 6/E",
+      "anno": "Year",
+      "go": "Find",
+      "clear": "Back to the list"
+    },
+    "degraded": "The semantic side of the search is unavailable: the results are lexical only.",
+    "empty": "No documents found."
+  },
   "document": { "title": "Document" },
   "status": { "title": "Corpus status" }
 }
