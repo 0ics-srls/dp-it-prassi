@@ -60,7 +60,7 @@ All Tools are public and read-only. The Gateway names carry the hyphenated prefi
 
 | Tool | Parameters | Returns |
 | --- | --- | --- |
-| `it-prassi_search` | `query`, `mode` (hybrid, lexical, semantic), `k` (1..50, default 10), `tipo`, `ente`, `anno_from`, `anno_to` | documents with estremi, snippet, headline and link; hybrid fuses full text and the best passage per document with RRF (k = 60) |
+| `it-prassi_search` | `query`, `mode` (hybrid, lexical, semantic), `k` (1..50, default 10), `tipo`, `ente`, `anno_from`, `anno_to` | documents with estremi, snippet, headline and link; hybrid fuses full text and the best passage per document with RRF (k = 60); a `mode=lexical` call does not embed the query (`x-embed.skipWhen`, since 0.2.3) |
 | `it-prassi_doc` | `id` or `tipo` + `numero` + `anno`; `offset`, `length` (default 20,000) | one document, the text in slices (`truncated`, `next_offset`) and its norm references |
 | `it-prassi_su_norma` | `norma_urn` (URN:NIR of the act or the article), `limit` | documents that cite the norm; best-effort |
 | `it-prassi_lookup` | `tipo`, `numero`, `anno`, `data_from`, `data_to`, `ente`, `fonte`, `sort`, `desc`, `limit`, `offset` | the estremi of the matching documents, never the text; `total` is the size of the filtered set |
